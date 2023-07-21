@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
+    <title>Wildlife Tracker</title>
+</head>
+<body>
+<h1>Welcome to Wildlife Tracker</h1>
+
+<h2>Animals:</h2>
+<ul>
+    {{#each animals}}
+        <li>{{name}}</li>
+    {{/each}}
+</ul>
+
+<h2>Sightings:</h2>
+<ul>
+    {{#each sightings}}
+        <li>Species ID: {{speciesId}}, Location: {{location}}, Ranger Name: {{rangerName}}</li>
+    {{/each}}
+</ul>
+</body>
+</html>
