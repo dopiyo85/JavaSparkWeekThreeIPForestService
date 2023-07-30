@@ -2,25 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
     <title>Wildlife Tracker</title>
+    <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
 </head>
 <body>
-<h1>Welcome to Wildlife Tracker</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Wildlife Tracker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="animals.hbs">Animals</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="rangers.hbs">Rangers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="location.hbs">Locations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="sightings.hbs">Sightings</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-<h2>Animals:</h2>
-<ul>
-    {{#each animals}}
-        <li>{{name}}</li>
-    {{/each}}
-</ul>
-
-<h2>Sightings:</h2>
-<ul>
-    {{#each sightings}}
-        <li>Species ID: {{speciesId}}, Location: {{location}}, Ranger Name: {{rangerName}}</li>
-    {{/each}}
-</ul>
+<div class="container">
+    <h1>Welcome to Wildlife Tracker</h1>
+    <p>This is the home page of the Wildlife Tracker application.</p>
+</div>
 </body>
 </html>

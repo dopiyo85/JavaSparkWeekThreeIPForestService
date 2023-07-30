@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
-    <title>Wildlife Tracker - Sightings</title>
+    <title>Wildlife Tracker - Rangers</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,49 +24,42 @@
                 <a class="nav-link" href="/locations">Locations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/sightings
-">Sightings</a>
+                <a class="nav-link" href="/sightings">Sightings</a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="container">
-    <h1>Sightings</h1>
-    <!-- Add a form for capturing data for a new sighting -->
-    <form action="/sightings" method="post">
-        <!-- Add input fields for locationId, rangerId, and animalId -->
+    <h1>Rangers</h1>
+    <!-- Add a form for capturing data for a new ranger -->
+    <form action="/rangers" method="post">
         <div class="form-group">
-            <label for="locationId">Location ID</label>
-            <input type="text" class="form-control" id="locationId" name="locationId" required>
+            <label for="rangerName">Name</label>
+            <input type="text" class="form-control" id="rangerName" name="rangerName" required>
         </div>
         <div class="form-group">
-            <label for="rangerId">Ranger ID</label>
-            <input type="text" class="form-control" id="rangerId" name="rangerId" required>
-        </div>
-        <div class="form-group">
-            <label for="animalId">Animal ID</label>
-            <input type="text" class="form-control" id="animalId" name="animalId" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Sighting</button>
+            <div class="form-group">
+                <label for="badgeNumber">Badge Number</label>
+                <input type="text" class="form-control" id="badgeNumber" name="badgeNumber" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Ranger</button>
     </form>
     <br>
-    <!-- Display the sightings in a table -->
+    <!-- Display the rangers in a table -->
     <table class="table table-striped">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Location ID</th>
-            <th>Ranger ID</th>
-            <th>Animal ID</th>
+            <th>Name</th>
+            <th>Badge Number</th>
         </tr>
         </thead>
         <tbody>
-        {{#each sightings}}
+        {{#each rangers}}
             <tr>
                 <td>{{this.id}}</td>
-                <td>{{this.locationId}}</td>
-                <td>{{this.rangerId}}</td>
-                <td>{{this.animalId}}</td>
+                <td>{{this.rangerName}}</td>
+                <td>{{this.badgeNumber}}</td>
             </tr>
         {{/each}}
         </tbody>
@@ -74,3 +67,4 @@
 </div>
 </body>
 </html>
+

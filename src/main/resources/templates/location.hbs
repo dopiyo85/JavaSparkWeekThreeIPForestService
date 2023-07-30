@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/public/css/styles.css">
-    <title>Wildlife Tracker - Sightings</title>
+    <title>Wildlife Tracker - Locations</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,49 +24,35 @@
                 <a class="nav-link" href="/locations">Locations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/sightings
-">Sightings</a>
+                <a class="nav-link" href="/sightings">Sightings</a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="container">
-    <h1>Sightings</h1>
-    <!-- Add a form for capturing data for a new sighting -->
-    <form action="/sightings" method="post">
-        <!-- Add input fields for locationId, rangerId, and animalId -->
+    <h1>Locations</h1>
+    <!-- Add a form for capturing data for a new location -->
+    <form action="/locations" method="post">
         <div class="form-group">
-            <label for="locationId">Location ID</label>
-            <input type="text" class="form-control" id="locationId" name="locationId" required>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
         </div>
-        <div class="form-group">
-            <label for="rangerId">Ranger ID</label>
-            <input type="text" class="form-control" id="rangerId" name="rangerId" required>
-        </div>
-        <div class="form-group">
-            <label for="animalId">Animal ID</label>
-            <input type="text" class="form-control" id="animalId" name="animalId" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Sighting</button>
+        <button type="submit" class="btn btn-primary">Add Location</button>
     </form>
     <br>
-    <!-- Display the sightings in a table -->
+    <!-- Display the locations in a table -->
     <table class="table table-striped">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Location ID</th>
-            <th>Ranger ID</th>
-            <th>Animal ID</th>
+            <th>Name</th>
         </tr>
         </thead>
         <tbody>
-        {{#each sightings}}
+        {{#each locations}}
             <tr>
                 <td>{{this.id}}</td>
-                <td>{{this.locationId}}</td>
-                <td>{{this.rangerId}}</td>
-                <td>{{this.animalId}}</td>
+                <td>{{this.name}}</td>
             </tr>
         {{/each}}
         </tbody>

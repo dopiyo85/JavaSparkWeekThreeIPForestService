@@ -1,7 +1,7 @@
 package org.javasparkips.wildlifetracker.dao;
 
 import org.javasparkips.wildlifetracker.DatabaseConnector;
-import org.javasparkips.wildlifetracker.models.Animal;
+import org.javasparkips.wildlifetracker.models.Location;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,21 +10,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimalDao {
-    public static Animal addAnimal(Animal animal) throws SQLException {
-        String query = "INSERT INTO animals (name, health, age, type) VALUES (?, ?, ?, ?) RETURNING id;";
+public class LocationDao {
+    public static Location addLocation(Location location) throws SQLException {
+        String query = "INSERT INTO location (name) VALUES (?) RETURNING id;";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, animal.getName());
-            stmt.setString(2, animal.getHealth());
-            stmt.setString(3, animal.getAge());
-            stmt.setString(4, animal.getType());
+            stmt.setString(1, location.getName());
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt(1);
-                animal.setId(id);
-                return animal;
+                location.setId(id);
+                return location;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,8 +30,8 @@ public class AnimalDao {
         return null;
     }
 
-    public static Animal getAnimalById(int id) throws SQLException {
-        String query = "SELECT * FROM animal WHERE id = ?;";
+    public static Location getLocationById(int id) throws SQLException {
+        String query = "SELECT * FROM location WHERE id = ?;";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -42,17 +39,11 @@ public class AnimalDao {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 String name = rs.getString("name");
-                String health = rs.getString("health");
-                String age = rs.getString("age");
-                String type = rs.getString("type");
 
-                Animal animal = new Animal();
-                animal.setId(id);
-                animal.setName(name);
-                animal.setHealth(health);
-                animal.setAge(age);
-                animal.setType(type);
-                return animal;
+                Location location = new Location();
+                location.setId(id);
+                location.setName(name);
+                return location;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,48 +52,39 @@ public class AnimalDao {
         return null;
     }
 
-    public static List<Animal> getAllAnimals() throws SQLException {
-        List<Animal> animals = new ArrayList<>();
-        String query = "SELECT * FROM animal;";
+    public static List<Location> getAllLocations() throws SQLException {
+        List<Location> locations = new ArrayList<>();
+        String query = "SELECT * FROM location;";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                String health = rs.getString("health");
-                String age = rs.getString("age");
-                String type = rs.getString("type");
 
-                Animal animal = new Animal();
-                animal.setId(id);
-                animal.setName(name);
-                animal.setHealth(health);
-                animal.setAge(age);
-                animal.setType(type);
+                Location location = new Location();
+                location.setId(id);
+                location.setName(name);
 
-                animals.add(animal);
+                locations.add(location);
             }
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         }
-        return animals;
+        return locations;
     }
 
-    public static Animal updateAnimal(Animal animal) throws SQLException {
-        String query = "UPDATE animal SET name = ?, health = ?, age = ?, type = ? WHERE id = ?;";
+    public static Location updateLocation(Location location) throws SQLException {
+        String query = "UPDATE location SET name = ? WHERE id = ?;";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, animal.getName());
-            stmt.setString(2, animal.getHealth());
-            stmt.setString(3, animal.getAge());
-            stmt.setString(4, animal.getType());
-            stmt.setInt(5, animal.getId());
+            stmt.setString(1, location.getName());
+            stmt.setInt(2, location.getId());
 
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
-                return animal;
+                return location;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,8 +93,8 @@ public class AnimalDao {
         return null;
     }
 
-    public static boolean deleteAnimal(int id) throws SQLException {
-        String query = "DELETE FROM animal WHERE id = ?;";
+    public static boolean deleteLocation(int id) throws SQLException {
+        String query = "DELETE FROM location WHERE id = ?;";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
