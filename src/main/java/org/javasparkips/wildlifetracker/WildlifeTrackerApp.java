@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class WildlifeTrackerApp {
     // Add a public static method to retrieve the database connection
-    public static Connection getDBConnection() throws SQLException {
-        return DatabaseConnector.getConnection();
-    }
+//    public static Connection getDBConnection() throws SQLException {
+//        return DatabaseConnector.getConnection();
+//   }
     public static void main(String[] args) {
         // Set the static files location
         staticFileLocation("/public");
@@ -29,18 +29,18 @@ public class WildlifeTrackerApp {
         // Route for the index page
         get("/", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
-            try (Connection conn = getDBConnection()) {
-                // Get all animals, sightings, rangers, and locations from the database
-                model.put("animals", AnimalHandler.getAllAnimals(req, res));
-                model.put("sightings", SightingHandler.getAllSightings(req, res));
-                model.put("rangers", RangerHandler.getAllRangers(req, res));
-                model.put("locations", LocationHandler.getAllLocations(req, res));
-            } catch (SQLException e) {
-                e.printStackTrace();
-                res.status(500); // Internal Server Error
-            }
+            // Get all animals, sightings, rangers, and locations from the database
+            model.put("animal", AnimalHandler.getAllAnimals(req, res));
+            model.put("sighting", SightingHandler.getAllSightings(req, res));
+            model.put("ranger", RangerHandler.getAllRangers(req, res));
+            model.put("location", LocationHandler.getAllLocations(req, res));
+
+            // Log the template rendering
+            System.out.println("Rendering template...");
+
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
+
 
         // Set up routes for Animal
         get("/animal", (req, res) -> AnimalHandler.getAllAnimals(req, res));

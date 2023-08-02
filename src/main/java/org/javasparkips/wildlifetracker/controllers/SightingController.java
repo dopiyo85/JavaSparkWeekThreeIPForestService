@@ -33,7 +33,7 @@ public class SightingController {
             res.status(500);
             return "Internal Server Error";
         }
-    }
+    } 
 
     public static Object updateSighting(Request req, Response res) {
         try {
